@@ -630,7 +630,7 @@ $('hist').addEventListener('click',e=>{
 const tg=(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initData)?window.Telegram.WebApp:null;
 const cloudOK=!!(tg&&tg.CloudStorage&&(!tg.isVersionAtLeast||tg.isVersionAtLeast('6.9')));
 const cs=cloudOK?tg.CloudStorage:null;
-const cbp=(fn,...args)=>new Promise((res,rej)=>fn.call(cs,...args,(err,val)=>err?rej(new Error(String(err))):res(val)));
+const cbp=(fn,...args)=>new Promise((res,rej)=>{const t=setTimeout(()=>rej(new Error('облако Telegram не ответило')),8000);try{fn.call(cs,...args,(err,val)=>{clearTimeout(t);err?rej(new Error(String(err))):res(val);});}catch(e){clearTimeout(t);rej(e);}});
 const KV=cloudOK?{
   keys:()=>cbp(cs.getKeys),
   get:async ks=>{const out={};for(let i=0;i<ks.length;i+=20){Object.assign(out,await cbp(cs.getItems,ks.slice(i,i+20))||{});}return out;},
@@ -734,7 +734,9 @@ document.addEventListener('click',e=>{ const a=e.target.closest('a[href^="http"]
 
 /* ---------- boot ---------- */
 if(tg){ try{ tg.ready(); tg.expand(); }catch(e){} }
+prof=Object.assign({},DEFAULT_PROF); profHist=DEFAULT_HIST.slice();
 loadDemo(); setDefaultCompare(); render();
+setStatus('', cloudOK?'Подключаю облако Telegram…':'Открыто вне Telegram: снимки хранятся только в этом браузере');
 (async()=>{
   db=true; col=makeCol('S'); pcol=makeCol('P');
   try{ await loadProfile(); }catch(e){ prof=Object.assign({},DEFAULT_PROF); profHist=DEFAULT_HIST.slice(); renderProfile(); }
