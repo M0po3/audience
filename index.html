@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Подписчики vladislav.zharykov</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=PT+Serif:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+/* Layout: same system as «Пульт» — sticky bar with section links → hero → numbered panels (изменения, месяцы, списки, снимок, история) */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --soft:#F4F6FA; --line:#E5E8EE; --fg:#0C0E13; --muted:#677084;
+  --accent:#1F5BFF; --accent-soft:#E9EFFF; --on-accent:#FFFFFF; --plus:#16955C; --plus-soft:#E3F5EC; --minus:#E5484D; --minus-soft:#FDECEC; --warm:#C77700; --warm-soft:#FFF3DF;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -12px rgba(16,24,40,.12);
+  --f-sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-serif:"PT Serif",Georgia,"Times New Roman",serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E0F12; --surface:#15171B; --soft:#1B1E23; --line:#262A31; --fg:#ECEEF2; --muted:#8B92A2;
+  --accent:#4F7FFF; --accent-soft:#18213D; --on-accent:#FFFFFF; --plus:#3CCB8A; --plus-soft:#12291F; --minus:#FF6B6E; --minus-soft:#3A1D20; --warm:#F2AE42; --warm-soft:#33280F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"],:root[data-pult="dark"]{
+  --bg:#0E0F12; --surface:#15171B; --soft:#1B1E23; --line:#262A31; --fg:#ECEEF2; --muted:#8B92A2;
+  --accent:#4F7FFF; --accent-soft:#18213D; --on-accent:#FFFFFF; --plus:#3CCB8A; --plus-soft:#12291F; --minus:#FF6B6E; --minus-soft:#3A1D20; --warm:#F2AE42; --warm-soft:#33280F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}
+:root[data-pult="light"]{
+  --bg:#FFFFFF; --surface:#FFFFFF; --soft:#F4F6FA; --line:#E5E8EE; --fg:#0C0E13; --muted:#677084;
+  --accent:#1F5BFF; --accent-soft:#E9EFFF; --on-accent:#FFFFFF; --plus:#16955C; --plus-soft:#E3F5EC; --minus:#E5484D; --minus-soft:#FDECEC; --warm:#C77700; --warm-soft:#FFF3DF;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -12px rgba(16,24,40,.12); color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:450 15px/1.5 var(--f-sans);letter-spacing:-.01em;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px;transition:background-color .4s ease,color .4s ease}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.label{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-weight:400}
+.label .num{color:var(--accent)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid transparent;transition:border-color .2s}
+.bar.scrolled{border-bottom-color:var(--line)}
+.bar-in{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.wordmark{font-family:var(--f-serif);font-weight:700;font-size:22px;letter-spacing:-.01em;line-height:1;flex:none}
+.nav{flex:1;min-width:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:7px 12px;border-radius:9px}
+.nav a:hover{color:var(--fg);background:var(--soft)}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px;flex:none}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.pill:hover{border-color:var(--accent)}
+@media (max-width:640px){.bar-in{flex-wrap:wrap}.nav{order:3;flex-basis:100%}}
+header{display:flex;flex-direction:column;gap:10px;padding-top:22px}
+.handle{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);text-decoration:none;width:max-content}
+.handle span{color:var(--accent)}
+.handle:hover span{text-decoration:underline}
+h1{font-weight:600;font-size:clamp(32px,6vw,58px);line-height:1;letter-spacing:-.05em;margin:0;text-wrap:balance}
+h1 em,h2 em{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--muted)}
+.sub{color:var(--muted);margin:0;max-width:62ch}
+.status{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.dot.ok{background:var(--plus)} .dot.warn{background:var(--warm)}
+.reveal{display:inline-block}
+@media (prefers-reduced-motion:no-preference){.reveal{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}.reveal.d1{animation-delay:.08s}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.panel{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:80px}
+h2{font-weight:600;font-size:26px;letter-spacing:-.045em;line-height:1.05;margin:4px 0 0}
+.banner{background:var(--warm-soft);color:var(--warm);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:500}
+.drop{border:1.5px dashed var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;cursor:pointer;background:var(--soft);transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop strong{font-size:15px;font-weight:600;letter-spacing:-.02em}
+.drop span{font-size:13px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+input[type=date],select,input[type=search]{font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:0;min-height:42px;font-family:var(--f-mono)}
+input[type=search]{background:var(--soft)}
+input[type=search]:focus,select:focus,input[type=date]:focus{outline:none;border-color:var(--accent)}
+.btn-primary,.btn-ghost,.btn-danger{border-radius:10px;font-weight:600;font-size:14px;padding:10px 16px;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.btn-primary{border:0;background:var(--accent);color:var(--on-accent)}
+.btn-primary:disabled{opacity:.45;cursor:default}
+.btn-ghost{border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{border:0;background:var(--minus);color:var(--on-accent)}
+.parsed{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.parsed b{color:var(--fg);font-variant-numeric:tabular-nums}
+details{font-size:14px}
+summary{cursor:pointer;color:var(--accent);font-family:var(--f-mono);font-size:12.5px}
+details ol{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+details p{color:var(--muted);margin:10px 0 0}
+.period{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.period b{color:var(--fg);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px;background:var(--surface);min-width:0}
+.stat .big{font-weight:600;font-size:clamp(30px,4.4vw,42px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .big small{font-size:.45em;color:var(--muted);font-weight:600;letter-spacing:-.01em;margin-left:4px}
+.stat.plus .big{color:var(--plus)} .stat.minus .big{color:var(--minus)} .stat.accent .big{color:var(--accent)}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--soft);border-radius:10px;padding:3px;gap:2px;align-self:flex-start;max-width:100%}
+.tab{border:0;background:transparent;padding:6px 12px;border-radius:8px;font-size:13px;color:var(--muted);font-weight:500;display:flex;gap:6px;align-items:center}
+.tab .c{font-family:var(--f-mono);font-size:11px;color:var(--accent)}
+.tab[aria-selected=true]{background:var(--surface);color:var(--fg);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.list li{display:flex;align-items:center;gap:12px;padding:9px 2px;border-top:1px solid var(--line);min-width:0}
+.list li:first-child{border-top:0}
+.av{position:relative;width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(135deg,hsl(var(--h) 70% 58%),hsl(calc(var(--h) + 40) 62% 46%))}
+.sign{position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;border:2px solid var(--surface);display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:11px;line-height:1}
+.sign.plus{background:var(--plus);color:var(--on-accent)}
+.sign.minus{background:var(--minus);color:var(--on-accent)}
+.sign.neutral{background:var(--accent-soft);color:var(--accent)}
+.list a{font-weight:500;font-size:14.5px;color:var(--fg);text-decoration:none;overflow-wrap:anywhere;min-width:0}
+.list a:hover{color:var(--accent)}
+.list .meta{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.empty{color:var(--muted);font-size:14px;padding:18px 0;justify-content:center}
+.more{align-self:flex-start}
+.months{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.month{border-top:1px solid var(--line)}
+.month:first-child{border-top:0}
+.mrow{width:100%;display:grid;grid-template-columns:9em minmax(0,1fr) auto;gap:14px;align-items:center;background:none;border:0;border-radius:10px;padding:11px 6px;color:var(--fg);text-align:left}
+.mrow:hover{background:var(--soft)}
+.mname{font-weight:600;letter-spacing:-.02em}
+.mname::first-letter{text-transform:uppercase}
+.mname .chev{display:inline-block;margin-left:6px;color:var(--muted);transition:transform .15s}
+.mrow[aria-expanded=true] .chev{transform:rotate(90deg);color:var(--accent)}
+.bars{display:flex;flex-direction:column;gap:3px;min-width:0}
+.bar-p,.bar-m,.bar-z{display:block;height:7px;border-radius:4px;min-width:3px}
+.bar-p{background:var(--plus)} .bar-m{background:var(--minus)} .bar-z{background:var(--line);width:3px}
+.mnums{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13px;display:flex;gap:10px;white-space:nowrap;justify-content:flex-end;min-width:6.5em}
+.mnums .p{color:var(--plus);font-weight:600} .mnums .m{color:var(--minus);font-weight:600} .mnums .na{color:var(--muted)}
+.mbody{margin:2px 6px 14px;border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:560px){.mbody{grid-template-columns:minmax(0,1fr)}.mrow{grid-template-columns:7.5em minmax(0,1fr) auto}}
+.mbody .label{display:block;margin-bottom:4px}
+.mbody .list li{padding:7px 2px}
+.mbody .av{width:28px;height:28px;font-size:12px}
+.mbody .sign{border-color:var(--soft)}
+.prof{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.prof-av{flex:none;width:104px;height:104px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,var(--accent),var(--plus),var(--accent));display:block}
+.prof-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--surface);background:var(--soft)}
+.prof-main{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.prof-handle{font-weight:600;font-size:22px;letter-spacing:-.04em;overflow-wrap:anywhere}
+.prof-name{color:var(--muted);font-size:14px}
+.prof-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+.pstat{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pstat b{font-weight:600;font-size:clamp(24px,3.6vw,32px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.pstat .d{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.pstat .d.up{color:var(--plus)} .pstat .d.down{color:var(--minus)}
+.prof-bio{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:2px;font-size:14px;max-width:62ch}
+.prof-bio .cat{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.prof-bio a{color:var(--accent);text-decoration:none;font-family:var(--f-mono);font-size:13px}
+.prof-bio a:hover{text-decoration:underline}
+.cover{display:flex;flex-direction:column;gap:6px}
+.cover .track{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.cover .track i{display:block;height:100%;background:var(--accent)}
+.cover.low .track i{background:var(--warm)}
+.cover .ct{font-size:13px;color:var(--muted)}
+.cover .ct b{color:var(--fg);font-variant-numeric:tabular-nums}
+.pform{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end;border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:12px}
+.pform input{font-family:var(--f-mono);font-size:16px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:42px;width:100%}
+.pform input:focus{outline:none;border-color:var(--accent)}
+.pform-act{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+.btn-ghost.busy{opacity:.6;pointer-events:none}
+.year{border-top:1px solid var(--line)}
+.year:first-child{border-top:0}
+.yname{font-weight:600;font-size:20px;letter-spacing:-.04em}
+.yname .chev{display:inline-block;margin-left:8px;color:var(--muted);font-size:16px;transition:transform .15s}
+.mrow[aria-expanded=true] .yname .chev{transform:rotate(90deg);color:var(--accent)}
+.months.inner{margin:0 0 12px 12px;padding-left:10px;border-left:2px solid var(--line)}
+@media (max-width:560px){.prof-stats{gap:8px}.prof{gap:14px}.prof-av{width:84px;height:84px}}
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.duo .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.duo .mbody{grid-template-columns:minmax(0,1fr)}
+.duo .mrow{grid-template-columns:7.5em minmax(0,1fr) auto}
+@media (max-width:900px){.duo{grid-template-columns:minmax(0,1fr)}}
+.hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.hist li{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 2px;border-top:1px solid var(--line)}
+.hist li:first-child{border-top:0}
+.hist .d{font-weight:600;letter-spacing:-.02em;min-width:9.5em}
+.hist .c{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.hist .act{margin-left:auto;display:flex;gap:6px;align-items:center}
+.hist .act button{padding:5px 10px;font-size:12.5px;min-height:32px}
+.confirm{font-family:var(--f-mono);font-size:12px;color:var(--minus)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:11px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);z-index:20;box-shadow:var(--shadow)}
+footer{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:8px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="bar" id="bar"><div class="bar-in">
+  <div class="wordmark">Аудитория</div>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#profilePanel">Профиль</a>
+    <a href="#summary">Изменения</a>
+    <a href="#monthsPanel">По годам</a>
+    <a href="#listsPanel">Списки</a>
+    <a href="#upload">Снимок</a>
+    <a href="#history">История</a>
+  </nav>
+  <button class="pill" id="themeBtn" type="button" aria-label="Оформление"><span class="dot"></span><span id="themeLabel">авто</span></button>
+</div></div>
+
+<div class="wrap">
+  <header>
+    <a class="handle reveal" href="https://www.instagram.com/vladislav.zharykov" target="_blank" rel="noopener">// instagram · <span>@vladislav.zharykov</span></a>
+    <h1 class="reveal d1">Подписчики <em>— кто пришёл, кто ушёл</em></h1>
+    <p class="sub">Загружайте выгрузку подписчиков из Instagram раз в неделю или когда захотите. Каждая выгрузка становится снимком, а приложение сравнивает снимки между собой.</p>
+    <div class="status" id="status"><span class="dot" id="statusDot"></span><span id="statusText">Подключаю хранилище…</span></div>
+  </header>
+
+
+  <div class="banner" id="demoBanner" hidden>Это пример с вымышленными никами. Загрузите свою первую выгрузку, и здесь появятся ваши данные.</div>
+
+  <div class="duo">
+  <section class="panel" id="profilePanel" aria-labelledby="profTitle">
+    <div class="row" style="justify-content:space-between;align-items:flex-end">
+      <div><span class="label"><span class="num">01</span> — профиль</span><h2 id="profTitle">Сейчас <em>— в instagram</em></h2></div>
+      <button class="btn-ghost" id="profRefresh" type="button">Вписать цифры</button>
+    </div>
+    <div class="prof">
+      <a class="prof-av" href="https://www.instagram.com/vladislav.zharykov/" target="_blank" rel="noopener"><img src="data:image/jpeg;base64,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" alt="Фото профиля vladislav.zharykov"></a>
+      <div class="prof-main">
+        <div class="prof-handle">vladislav.zharykov</div>
+        <div class="prof-name" id="profName">Загружаю данные профиля…</div>
+        <div class="prof-stats" id="profStats"></div>
+      </div>
+    </div>
+    <div class="prof-bio" id="profBio" hidden></div>
+    <form class="pform" id="pform" hidden autocomplete="off">
+      <div class="field"><label class="label" for="pfPosts">публикаций</label><input type="number" inputmode="numeric" min="0" id="pfPosts"></div>
+      <div class="field"><label class="label" for="pfFollowers">подписчиков</label><input type="number" inputmode="numeric" min="0" id="pfFollowers"></div>
+      <div class="field"><label class="label" for="pfFollowing">подписок</label><input type="number" inputmode="numeric" min="0" id="pfFollowing"></div>
+      <div class="pform-act"><button class="btn-primary" type="submit">Сохранить</button><button class="btn-ghost" type="button" id="pfCancel">Отмена</button></div>
+    </form>
+    <div class="label" id="profMeta"></div>
+  </section>
+
+  <section class="panel" id="summary" aria-labelledby="sumTitle">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div><span class="label"><span class="num">02</span> — сравнение</span><h2 id="sumTitle">Изменения <em>— между снимками</em></h2></div>
+      <div class="row" id="cmpRow" style="gap:8px">
+        <div class="field"><label class="label" for="fromSel">С</label><select id="fromSel"></select></div>
+        <div class="field"><label class="label" for="toSel">По</label><select id="toSel"></select></div>
+      </div>
+    </div>
+    <div class="period" id="period"></div>
+    <div class="banner" id="snapWarn" hidden></div>
+    <div class="stats" id="stats"></div>
+    <div class="cover" id="profCover" hidden></div>
+    <div id="chartBox"></div>
+  </section>
+  </div>
+
+  <div class="duo">
+  <section class="panel" id="monthsPanel" aria-labelledby="monTitle">
+    <div><span class="label"><span class="num">03</span> — динамика</span><h2 id="monTitle">По годам <em>— и месяцам внутри</em></h2></div>
+    <p class="hint" id="monHint"></p>
+    <ul class="months" id="months"></ul>
+  </section>
+
+  <section class="panel" id="listsPanel" aria-labelledby="listTitle">
+    <div><span class="label"><span class="num">04</span> — люди</span><h2 id="listTitle">Списки <em>— по нику</em></h2></div>
+    <div class="seg" role="tablist" id="tabs"></div>
+    <p class="hint" id="tabHint"></p>
+    <input type="search" id="q" placeholder="Найти ник" aria-label="Найти ник">
+    <ul class="list" id="list"></ul>
+    <button class="btn-ghost more" id="moreBtn" hidden>Показать ещё</button>
+  </section>
+  </div>
+
+  <section class="panel" id="upload" aria-labelledby="upTitle">
+    <div><span class="label"><span class="num">05</span> — снимок</span><h2 id="upTitle">Новый снимок <em>— из выгрузки</em></h2></div>
+    <label class="drop" id="drop" tabindex="0">
+      <strong>Выберите ZIP-архив из Instagram</strong>
+      <span>Нажмите, чтобы выбрать файл. Подойдут и отдельные followers_1.json / following.json</span>
+      <input type="file" id="file" accept=".zip,.json,.html,application/zip,application/json,text/html" multiple hidden>
+    </label>
+    <div class="parsed" id="parsed" hidden></div>
+    <div class="row" id="saveRow" hidden>
+      <div class="field">
+        <label class="label" for="snapDate">Дата выгрузки</label>
+        <input type="date" id="snapDate">
+      </div>
+      <button class="btn-primary" id="saveBtn">Сохранить снимок</button>
+      <button class="btn-ghost" id="cancelBtn">Отмена</button>
+    </div>
+    <details>
+      <summary>Как скачать выгрузку из Instagram</summary>
+      <ol>
+        <li>Профиль → меню ☰ → <b>Центр аккаунтов</b>.</li>
+        <li><b>Ваша информация и разрешения</b> → <b>Экспорт информации</b> (или «Скачать информацию»).</li>
+        <li><b>Создать экспорт</b> → выберите аккаунт vladislav.zharykov → <b>Экспорт на устройство</b>.</li>
+        <li>В «Настроить информацию» оставьте только <b>Подписчики и подписки</b>.</li>
+        <li>Диапазон дат: <b>За всё время</b>. Формат: <b>JSON</b>. Нажмите <b>Начать экспорт</b>.</li>
+        <li>Когда Instagram пришлёт уведомление (обычно от нескольких минут до пары часов), скачайте ZIP и перетащите его сюда.</li>
+      </ol>
+      <p>Названия пунктов могут немного отличаться в разных версиях приложения. Файлы обрабатываются прямо в браузере, на сервер уходят только списки ников.</p>
+    </details>
+  </section>
+
+  <section class="panel" id="history" aria-labelledby="histTitle">
+    <div><span class="label"><span class="num">06</span> — история</span><h2 id="histTitle">Все снимки <em>— по датам</em></h2></div>
+    <ul class="hist" id="hist"></ul>
+  </section>
+  <footer><span>// снимки в облаке telegram · видишь их только ты</span><span>данные из официальной выгрузки instagram</span></footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+const $ = id => document.getElementById(id);
+const CHUNK = 30000;
+let db = null, uid = null, col = null;
+let snaps = [];          // {id, date, takenAt, followers:Set, following:Set}
+let demo = true;
+let pending = null;      // parsed upload
+let tab = 'new', shown = 120, openMonth = null, openYears = null;
+
+/* ---------- helpers ---------- */
+const fmtDate = d => new Date(d+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+const fmtShort = d => new Date(d+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+const today = () => { const t=new Date(); return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0'); };
+const toISO = dt => dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+function plural(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c;}
+let toastT;
+function toast(msg){const t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3200);}
+function setStatus(kind,text){$('statusDot').className='dot '+(kind||'');$('statusText').textContent=text;}
+
+/* ---------- parsing Instagram export ---------- */
+function nameFromHref(href){
+  try{ const u=new URL(href); if(!/instagram\.com$/.test(u.hostname.replace(/^www\./,'')))return null;
+    const segs=u.pathname.split('/').filter(Boolean).filter(s=>s!=='_u');
+    return segs[0]||null; }catch(e){return null;}
+}
+const clean = s => (s||'').trim().replace(/^@/,'').toLowerCase();
+const valid = s => /^[a-z0-9._]{1,30}$/.test(s);
+
+function namesFromJSON(obj){
+  const out=new Map();
+  (function walk(o){
+    if(Array.isArray(o)){o.forEach(walk);return;}
+    if(o&&typeof o==='object'){
+      if(Array.isArray(o.string_list_data)){
+        let n=null, ts=0;
+        for(const s of o.string_list_data){ n = clean(s.value) || (s.href&&clean(nameFromHref(s.href))) || n; if(s.timestamp) ts=+s.timestamp||0; }
+        if(!n||!valid(n)) n=clean(o.title);
+        if(n&&valid(n)) out.set(n, ts||out.get(n)||0);
+        return;
+      }
+      Object.values(o).forEach(walk);
+    }
+  })(obj);
+  return out;
+}
+function namesFromHTML(text){
+  const doc=new DOMParser().parseFromString(text,'text/html'); const out=new Map();
+  doc.querySelectorAll('a[href]').forEach(a=>{ const n=clean(nameFromHref(a.getAttribute('href'))); if(!n||!valid(n))return;
+    let ts=0; const box=a.parentElement&&a.parentElement.parentElement;
+    if(box){ const t=Date.parse(box.textContent.replace(a.textContent,'').trim()); if(!isNaN(t)) ts=Math.floor(t/1000); }
+    out.set(n, ts||out.get(n)||0); });
+  return out;
+}
+function kindOf(path){
+  const f=path.split('/').pop().toLowerCase();
+  if(/^followers(_\d+)?\.(json|html)$/.test(f)) return 'followers';
+  if(/^following\.(json|html)$/.test(f)) return 'following';
+  return null;
+}
+function parseText(path,text){
+  if(/\.json$/i.test(path)){ try{return namesFromJSON(JSON.parse(text));}catch(e){return new Map();} }
+  return namesFromHTML(text);
+}
+async function handleFiles(fileList){
+  const res={followers:new Map(),following:new Map(),date:null,seen:{followers:false,following:false}};
+  for(const file of fileList){
+    if(/\.zip$/i.test(file.name)){
+      if(!window.JSZip){toast('Не удалось загрузить модуль для ZIP. Распакуйте архив и выберите JSON-файлы.');continue;}
+      let zip; try{ zip=await JSZip.loadAsync(file); }catch(e){ toast('Файл '+file.name+' не похож на ZIP-архив.'); continue; }
+      const entries=Object.values(zip.files).filter(e=>!e.dir&&kindOf(e.name));
+      for(const e of entries){ const k=kindOf(e.name); const set=parseText(e.name,await e.async('string')); set.forEach((ts,n)=>res[k].set(n,ts||res[k].get(n)||0)); res.seen[k]=true; if(k==='followers'&&e.date&&!res.date) res.date=toISO(e.date); }
+    } else {
+      let k=kindOf(file.name);
+      const text=await file.text(); const set=parseText(file.name,text);
+      if(!k){ k=/relationships_following/.test(text)?'following':(/followers/i.test(file.name)?'followers':null); }
+      if(!k){ toast('Не понял, что в файле '+file.name+'. Нужны followers_*.json и following.json.'); continue; }
+      set.forEach((ts,n)=>res[k].set(n,ts||res[k].get(n)||0)); res.seen[k]=true;
+      if(!res.date&&file.lastModified) res.date=toISO(new Date(file.lastModified));
+    }
+  }
+  if(!res.seen.followers&&!res.seen.following){ toast('В выгрузке не нашлось списков подписчиков. Проверьте, что выбраны «Подписчики и подписки».'); return; }
+  pending=res;
+  const p=$('parsed'); p.hidden=false;
+  p.innerHTML='Найдено: подписчиков <b>'+res.followers.size+'</b>, подписок <b>'+res.following.size+'</b>.'+
+    (!res.seen.following?' Файла подписок нет, сравнение «не подписан в ответ» будет неполным.':'')+
+    (!res.seen.followers?' Файла подписчиков нет, без него не посчитать, кто отписался.':'');
+  $('snapDate').value=res.date||today(); $('saveRow').hidden=false;
+}
+
+/* ---------- storage ---------- */
+function chunks(str){const a=[];for(let i=0;i<str.length;i+=CHUNK)a.push(str.slice(i,i+CHUNK));return a.length?a:[''];}
+async function saveSnapshot(){
+  if(!pending)return;
+  const date=$('snapDate').value||today();
+  const sid='s'+Date.now();
+  const ser=m=>[...m.entries()].sort((a,b)=>a[0]<b[0]?-1:1).map(([n,t])=>n+'\t'+(t||0).toString(36)).join('\n');
+  const fl=ser(pending.followers), fg=ser(pending.following);
+  const fc=chunks(fl), gc=chunks(fg);
+  const snap={id:sid,date,takenAt:Date.now(),followers:new Set(pending.followers.keys()),fts:Object.fromEntries(pending.followers),gts:Object.fromEntries(pending.following),following:new Set(pending.following.keys()),hasFollowing:pending.seen.following,hasFollowers:pending.seen.followers};
+  $('saveBtn').disabled=true;
+  if(db&&col){
+    try{
+      for(let i=0;i<fc.length;i++) await col.doc(sid+'_f_'+i).set({type:'part',snap:sid,kind:'followers',i,text:fc[i]});
+      for(let i=0;i<gc.length;i++) await col.doc(sid+'_g_'+i).set({type:'part',snap:sid,kind:'following',i,text:gc[i]});
+      await col.doc(sid).set({type:'snap',date,takenAt:snap.takenAt,fParts:fc.length,gParts:gc.length,followersCount:snap.followers.size,followingCount:snap.following.size,hasFollowing:snap.hasFollowing,hasFollowers:snap.hasFollowers});
+      toast('Снимок за '+fmtDate(date)+' сохранён');
+    }catch(e){ toast('Не удалось сохранить: '+(e&&e.message||'ошибка хранилища')+'. Снимок останется до закрытия приложения.'); }
+  } else toast('Снимок добавлен, но сохранится только до закрытия приложения');
+  if(demo){snaps=[];demo=false;}
+  snaps.push(snap); sortSnaps();
+  pending=null; $('parsed').hidden=true; $('saveRow').hidden=true; $('saveBtn').disabled=false; $('file').value='';
+  setDefaultCompare(); render();
+}
+async function deleteSnapshot(id){
+  const s=snaps.find(x=>x.id===id); if(!s)return;
+  if(db&&col&&!demo){
+    try{
+      const all=await col.get();
+      for(const d of all.docs){ const v=d.data()||{}; if(d.id===id||v.snap===id) await col.doc(d.id).delete(); }
+    }catch(e){ toast('Не удалось удалить: '+(e&&e.message||'ошибка хранилища')); return; }
+  }
+  snaps=snaps.filter(x=>x.id!==id);
+  if(!snaps.length&&!demo){ loadDemo(); }
+  setDefaultCompare(); render(); toast('Снимок удалён');
+}
+async function loadAll(){
+  const all=await col.get(); const metas=[], parts={};
+  all.docs.forEach(d=>{const v=d.data()||{}; if(v.type==='snap')metas.push({id:d.id,...v}); else if(v.type==='part'){(parts[v.snap]=parts[v.snap]||[]).push(v);} });
+  return metas.map(m=>{
+    const ps=(parts[m.id]||[]);
+    const join=k=>ps.filter(p=>p.kind===k).sort((a,b)=>a.i-b.i).map(p=>p.text).join('');
+    const parse=s=>{const set=new Set(),ts={};(s?s.split('\n'):[]).forEach(l=>{if(!l)return;const p=l.split('\t');set.add(p[0]);ts[p[0]]=parseInt(p[1]||'0',36)||0;});return {set,ts};};
+    const F=parse(join('followers')), G=parse(join('following'));
+    return {id:m.id,date:m.date,takenAt:m.takenAt,followers:F.set,fts:F.ts,following:G.set,gts:G.ts,hasFollowing:m.hasFollowing!==false,hasFollowers:m.hasFollowers!==false};
+  });
+}
+function sortSnaps(){snaps.sort((a,b)=>a.date===b.date?a.takenAt-b.takenAt:(a.date<b.date?-1:1));}
+
+/* ---------- demo ---------- */
+function loadDemo(){
+  demo=true;
+  const base=['anya.travels','dmitry_k','lena.photo','max.runner','olga_art','sasha.dev','irina.v','kostya_music','nastya.cooks','vova.bikes','yulia_reads','artem.film','katya.studio','misha_ok','polina.flow','roman.tech','sveta_garden','timur.lens','vera.design','zhenya.surf','egor.climb','daria_notes','ilya.coffee','marina.k'];
+  const mk=(date,f,g)=>({id:'demo'+date,date,takenAt:0,followers:new Set(f),following:new Set(g),hasFollowing:true,hasFollowers:true});
+  const g=['anya.travels','dmitry_k','lena.photo','sasha.dev','kostya_music','artem.film','roman.tech','vera.design','city.events','food.blog.odessa'];
+  snaps=[
+    mk('2026-10-13',base.slice(0,18),g),
+    mk('2026-10-20',base.slice(0,18).filter(x=>x!=='misha_ok').concat(['zhenya.surf','egor.climb']),g),
+    mk('2026-10-27',base.slice(0,18).filter(x=>x!=='misha_ok'&&x!=='olga_art').concat(['zhenya.surf','egor.climb','daria_notes']),g),
+    mk('2026-11-03',base.slice(0,18).filter(x=>x!=='misha_ok'&&x!=='olga_art'&&x!=='irina.v').concat(['zhenya.surf','egor.climb','daria_notes','ilya.coffee','marina.k']),g)
+  ];
+  const fixed={'zhenya.surf':'2026-10-15','egor.climb':'2026-10-18','daria_notes':'2026-10-23','ilya.coffee':'2026-10-31','marina.k':'2026-11-02'};
+  const fts={}; base.forEach(n=>{ if(fixed[n]){fts[n]=Date.parse(fixed[n]+'T12:00:00')/1000;return;} let h=0;for(const ch of n)h=(h*31+ch.charCodeAt(0))%240; fts[n]=Date.parse('2026-02-01T12:00:00')/1000+h*86400; });
+  snaps.forEach(s=>s.fts=fts);
+}
+
+/* ---------- compare & render ---------- */
+function setDefaultCompare(){
+  const n=snaps.length; const fs=$('fromSel'), ts=$('toSel');
+  const opts=snaps.map(s=>'<option value="'+s.id+'">'+fmtShort(s.date)+(snaps.filter(x=>x.date===s.date).length>1?' ('+new Date(s.takenAt).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})+')':'')+'</option>').join('');
+  fs.innerHTML=opts; ts.innerHTML=opts;
+  if(n){ fs.value=snaps[Math.max(0,n-2)].id; ts.value=snaps[n-1].id; }
+}
+function diff(a,b){const r=[];b.forEach(x=>{if(!a.has(x))r.push(x)});return r.sort();}
+function current(){
+  const A=snaps.find(s=>s.id===$('fromSel').value), B=snaps.find(s=>s.id===$('toSel').value);
+  return {A,B};
+}
+function render(){
+  $('demoBanner').hidden=!demo;
+  const {A,B}=current();
+  $('cmpRow').hidden=snaps.length<2;
+  const stats=$('stats'); const period=$('period');
+  let lists={};
+  if(!B){ period.textContent='Пока нет снимков. Загрузите первую выгрузку.'; stats.innerHTML=''; $('chartBox').innerHTML=''; }
+  else{
+    const one=!A||A.id===B.id;
+    const gained=one?[]:diff(A.followers,B.followers), lost=one?[]:diff(B.followers,A.followers);
+    const notBack=B.hasFollowing?diff(B.followers,B.following):[], fans=B.hasFollowing?diff(B.following,B.followers):[];
+    lists={new:gained,lost,notBack,fans,all:[...B.followers].sort()};
+    if(one) period.innerHTML=snaps.length<2?'Снимок за <b>'+fmtDate(B.date)+'</b>. Загрузите следующую выгрузку позже, и здесь появится разница.':'Выберите два разных снимка для сравнения.';
+    else{ const days=Math.round((new Date(B.date)-new Date(A.date))/864e5);
+      period.innerHTML='С <b>'+fmtDate(A.date)+'</b> по <b>'+fmtDate(B.date)+'</b>'+(days>0?' · '+days+' '+plural(days,'день','дня','дней'):''); }
+    const delta=one?0:B.followers.size-A.followers.size;
+    stats.innerHTML=
+      st('plus',one?'—':'+'+gained.length,'подписались')+
+      st('minus',one?'—':'−'+lost.length,'отписались')+
+      st('accent',B.followers.size.toLocaleString('ru-RU')+(one?'':'<small>'+(delta>=0?'+':'−')+Math.abs(delta)+'</small>'),'подписчиков')+
+      st('',B.hasFollowing?notBack.length:'—','не подписаны в ответ');
+    drawChart();
+  }
+  snapWarning(B);
+  const tabs=[
+    ['new','Подписались',lists.new,'Аккаунты, которых не было в первом снимке и которые есть во втором.','plus'],
+    ['lost','Отписались',lists.lost,'Были в первом снимке и пропали во втором. Сюда же попадают удалённые, заблокированные или переименованные аккаунты.','minus'],
+    ['notBack','Не подписаны в ответ',lists.notBack,'Вы на них подписаны, а они на вас нет (по последнему выбранному снимку).','neutral'],
+    ['fans','Вы не подписаны в ответ',lists.fans,'Подписаны на вас, но вы на них нет.','neutral'],
+    ['all','Все подписчики',lists.all,'Полный список подписчиков в выбранном снимке.','neutral']
+  ];
+  $('tabs').innerHTML=tabs.map(t=>'<button class="tab" role="tab" data-t="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+' <span class="c">'+(t[2]?t[2].length:0)+'</span></button>').join('');
+  const cur=tabs.find(t=>t[0]===tab);
+  $('tabHint').textContent=cur[3];
+  const q=clean($('q').value);
+  const items=(cur[2]||[]).filter(n=>!q||n.includes(q));
+  const sign={plus:'+',minus:'−',neutral:'·'}[cur[4]];
+  $('list').innerHTML=items.length?items.slice(0,shown).map(n=>'<li>'+avatar(n,'<span class="sign '+cur[4]+'">'+sign+'</span>')+'<a href="https://www.instagram.com/'+n+'/" target="_blank" rel="noopener">'+n+'</a></li>').join(''):'<li class="empty">'+(q?'Никого с таким ником.':'Здесь пусто.')+'</li>';
+  $('moreBtn').hidden=items.length<=shown;
+  $('moreBtn').textContent='Показать ещё ('+(items.length-shown)+')';
+  // history
+  $('hist').innerHTML=snaps.length?snaps.slice().reverse().map((s,i,arr)=>{
+    const prev=arr[i+1]; let ch='';
+    if(prev){const g=diff(prev.followers,s.followers).length,l=diff(s.followers,prev.followers).length;ch=' · <span style="color:var(--plus)">+'+g+'</span> <span style="color:var(--minus)">−'+l+'</span>';}
+    return '<li data-id="'+s.id+'"><span class="d">'+fmtDate(s.date)+'</span><span class="c">'+s.followers.size+' подписчиков · '+s.following.size+' подписок'+ch+'</span><span class="act">'+(demo?'':'<button class="btn-ghost" data-del="'+s.id+'">Удалить</button>')+'</span></li>';
+  }).join(''):'<li class="empty">Снимков пока нет.</li>';
+  renderMonths();
+  if(typeof renderProfile==='function') renderProfile();
+}
+const monthKey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+const monthName=k=>new Date(+k.slice(0,4),+k.slice(5,7)-1,1).toLocaleDateString('ru-RU',{month:'long',year:'numeric'}).replace(/\s*г\.?$/,'');
+const monthOnly=k=>new Date(+k.slice(0,4),+k.slice(5,7)-1,1).toLocaleDateString('ru-RU',{month:'long'});
+const dayShort=d=>d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+function renderMonths(){
+  const B=current().B, box=$('months'), hint=$('monHint');
+  if(!B){box.innerHTML='';hint.textContent='Появится после первой выгрузки.';return;}
+  const map={}; const get=k=>map[k]=map[k]||{gain:[],lost:[],lostKnown:false};
+  const unknown=[];
+  B.followers.forEach(n=>{const t=B.fts&&B.fts[n]; if(t){get(monthKey(new Date(t*1000))).gain.push([n,t]);} else unknown.push(n);});
+  const upto=snaps.filter(s=>s.date<B.date||s.id===B.id||(s.date===B.date&&s.takenAt<=B.takenAt));
+  for(let i=1;i<upto.length;i++){const m=get(upto[i].date.slice(0,7)); m.lostKnown=true; diff(upto[i].followers,upto[i-1].followers).forEach(n=>m.lost.push([n,upto[i].date]));}
+  const keys=Object.keys(map).sort().reverse();
+  const max=Math.max(1,...keys.map(k=>Math.max(map[k].gain.length,map[k].lost.length)));
+  const hasTs=B.followers.size>unknown.length;
+  hint.textContent=(hasTs?'Зелёным: сколько нынешних подписчиков подписались в этом месяце (дата из выгрузки Instagram). ':'В этой выгрузке нет дат подписки, поэтому подписки по месяцам распределить нельзя. ')+'Красным: сколько отписались. Отписки видны только по сравнению снимков, поэтому они появляются начиная со второго снимка и попадают в месяц, когда сделан снимок.';
+  const li=(n,meta,cls,sign)=>'<li>'+avatar(n,'<span class="sign '+cls+'">'+sign+'</span>')+'<a href="https://www.instagram.com/'+n+'/" target="_blank" rel="noopener">'+n+'</a><span class="meta">'+meta+'</span></li>';
+  const sub=(title,arr,fmt,cls,sign,empty)=>'<div><div class="label">'+title+' · '+arr.length+'</div><ul class="list">'+(arr.length?arr.slice(0,300).map(x=>li(x[0],fmt(x),cls,sign)).join('')+(arr.length>300?'<li class="empty">и ещё '+(arr.length-300)+'</li>':''):'<li class="empty">'+empty+'</li>')+'</ul></div>';
+  const monthLi=k=>{const m=map[k]; const open=openMonth===k;
+    m.gain.sort((a,b)=>b[1]-a[1]);
+    const gw=m.gain.length?Math.max(3,m.gain.length/max*100):0, lw=m.lost.length?Math.max(3,m.lost.length/max*100):0;
+    return '<li class="month"><button class="mrow" data-m="'+k+'" aria-expanded="'+open+'"><span class="mname">'+monthOnly(k)+'<span class="chev" aria-hidden="true">›</span></span>'+
+      '<span class="bars" aria-hidden="true"><span class="'+(gw?'bar-p':'bar-z')+'" style="'+(gw?'width:'+gw+'%':'')+'"></span><span class="'+(lw?'bar-m':'bar-z')+'" style="'+(lw?'width:'+lw+'%':'')+'"></span></span>'+
+      '<span class="mnums"><span class="p">+'+m.gain.length+'</span>'+(m.lostKnown?'<span class="m">−'+m.lost.length+'</span>':'<span class="na" title="Нет снимков за этот месяц">−?</span>')+'</span></button>'+
+      (open?'<div class="mbody">'+sub('Подписались',m.gain,x=>dayShort(new Date(x[1]*1000)),'plus','+','Никто из нынешних подписчиков')+sub('Отписались',m.lost,x=>'снимок '+fmtShort(x[1]),'minus','−',m.lostKnown?'Никто':'Нет снимков за этот месяц')+'</div>':'')+'</li>';};
+  const years={}; keys.forEach(k=>{(years[k.slice(0,4)]=years[k.slice(0,4)]||[]).push(k);});
+  const yKeys=Object.keys(years).sort().reverse();
+  if(openYears===null) openYears=new Set(yKeys.slice(0,1));
+  const ysum=y=>{let g=0,l=0,lk=false;years[y].forEach(k=>{g+=map[k].gain.length;l+=map[k].lost.length;lk=lk||map[k].lostKnown;});return {g,l,lk};};
+  const ymax=Math.max(1,...yKeys.map(y=>{const t=ysum(y);return Math.max(t.g,t.l);}));
+  let html=yKeys.map(y=>{const t=ysum(y), open=openYears.has(y);
+    const gw=t.g?Math.max(3,t.g/ymax*100):0, lw=t.l?Math.max(3,t.l/ymax*100):0;
+    return '<li class="year"><button class="mrow" data-y="'+y+'" aria-expanded="'+open+'"><span class="yname">'+y+'<span class="chev" aria-hidden="true">›</span></span>'+
+      '<span class="bars" aria-hidden="true"><span class="'+(gw?'bar-p':'bar-z')+'" style="'+(gw?'width:'+gw+'%':'')+'"></span><span class="'+(lw?'bar-m':'bar-z')+'" style="'+(lw?'width:'+lw+'%':'')+'"></span></span>'+
+      '<span class="mnums"><span class="p">+'+t.g+'</span>'+(t.lk?'<span class="m">−'+t.l+'</span>':'<span class="na">−?</span>')+'</span></button>'+
+      (open?'<ul class="months inner">'+years[y].map(monthLi).join('')+'</ul>':'')+'</li>';}).join('');
+  if(unknown.length) html+='<li class="month"><button class="mrow" data-m="unknown" aria-expanded="'+(openMonth==='unknown')+'"><span class="mname">Дата неизвестна<span class="chev" aria-hidden="true">›</span></span><span class="bars"></span><span class="mnums"><span class="na">'+unknown.length+'</span></span></button>'+
+    (openMonth==='unknown'?'<div class="mbody">'+sub('Подписчики без даты',unknown.sort().map(n=>[n]),()=>'','neutral','·','')+'</div>':'')+'</li>';
+  box.innerHTML=html||'<li class="empty">Нет данных по месяцам.</li>';
+}
+function minTs(o){let m=0;if(o)for(const k in o){const t=o[k];if(t&&(!m||t<m))m=t;}return m;}
+function snapWarning(B){
+  const w=$('snapWarn'); if(!B||demo){w.hidden=true;return;}
+  const f=minTs(B.fts), g=minTs(B.gts); let msg='';
+  const mon=t=>new Date(t*1000).toLocaleDateString('ru-RU',{month:'long',year:'numeric'}).replace(/\s*г\.?$/,'');
+  if(B.followers.size&&!f) msg='В этом снимке нет дат подписки: он загружен до обновления страницы. Удалите его внизу и загрузите архив заново, тогда появится разбивка по месяцам.';
+  else if(f&&g&&f-g>180*86400) msg='Похоже, список подписчиков неполный. Самый ранний подписчик в выгрузке появился в '+mon(f)+', а ваши подписки начинаются с '+mon(g)+'. Обычно это значит, что при экспорте выбран ограниченный период. Из-за этого давние подписчики не попали в файл и ошибочно считаются «не подписанными в ответ». Сделайте выгрузку с периодом «За всё время».';
+  w.textContent=msg; w.hidden=!msg;
+}
+function avatar(n,badge){let h=0;for(const ch of n)h=(h*31+ch.charCodeAt(0))%360;const l=(n.match(/[a-z0-9]/)||['?'])[0].toUpperCase();return '<span class="av" style="--h:'+h+'" aria-hidden="true">'+l+badge+'</span>';}
+function st(cls,n,t){return '<div class="stat '+cls+'"><span class="label">// '+t+'</span><div class="big">'+n+'</div></div>';}
+function drawChart(){
+  const box=$('chartBox');
+  if(snaps.length<2){box.innerHTML='';return;}
+  const W=700,H=170,pl=44,pr=16,pt=14,pb=28;
+  const vals=snaps.map(s=>s.followers.size);
+  let mn=Math.min(...vals),mx=Math.max(...vals); if(mn===mx){mn-=1;mx+=1;}
+  const pad=(mx-mn)*0.15; mn=Math.max(0,Math.floor(mn-pad)); mx=Math.ceil(mx+pad);
+  const x=i=>pl+(snaps.length===1?0:i*(W-pl-pr)/(snaps.length-1));
+  const y=v=>pt+(1-(v-mn)/(mx-mn))*(H-pt-pb);
+  const pts=vals.map((v,i)=>x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ');
+  const ticks=[mn,Math.round((mn+mx)/2),mx];
+  const step=Math.max(1,Math.ceil(snaps.length/6));
+  let s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Число подписчиков по снимкам">';
+  ticks.forEach(t=>{s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(t)+'" y2="'+y(t)+'" stroke="var(--line)" stroke-width="1"/><text x="'+(pl-8)+'" y="'+(y(t)+4)+'" text-anchor="end">'+t+'</text>';});
+  s+='<polygon points="'+x(0)+','+(H-pb)+' '+pts+' '+x(vals.length-1)+','+(H-pb)+'" fill="var(--accent-soft)"/>';
+  s+='<polyline points="'+pts+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  vals.forEach((v,i)=>{const last=i===vals.length-1;s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(last?5:3)+'" fill="'+(last?'var(--accent)':'var(--surface)')+'" stroke="var(--accent)" stroke-width="2"><title>'+fmtDate(snaps[i].date)+': '+v+'</title></circle>';
+    if(i%step===0||last){const anchor=i===0?'start':(last?'end':'middle');s+='<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="'+anchor+'">'+fmtShort(snaps[i].date)+'</text>';}});
+  s+='</svg>';
+  box.innerHTML='<div class="label" style="margin-bottom:6px">Подписчики по снимкам</div>'+s;
+}
+
+/* ---------- events ---------- */
+const drop=$('drop');
+drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click();}});
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop',e=>{if(e.dataTransfer.files.length)handleFiles(e.dataTransfer.files);});
+$('file').addEventListener('change',e=>{if(e.target.files.length)handleFiles(e.target.files);});
+$('saveBtn').addEventListener('click',saveSnapshot);
+$('cancelBtn').addEventListener('click',()=>{pending=null;$('parsed').hidden=true;$('saveRow').hidden=true;$('file').value='';});
+$('fromSel').addEventListener('change',()=>{shown=120;render();});
+$('toSel').addEventListener('change',()=>{shown=120;render();});
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;tab=b.dataset.t;shown=120;render();});
+$('q').addEventListener('input',()=>{shown=120;render();});
+$('moreBtn').addEventListener('click',()=>{shown+=200;render();});
+$('months').addEventListener('click',e=>{const b=e.target.closest('.mrow');if(!b)return;if(b.dataset.y){const y=b.dataset.y;openYears.has(y)?openYears.delete(y):openYears.add(y);}else{openMonth=openMonth===b.dataset.m?null:b.dataset.m;}renderMonths();});
+$('hist').addEventListener('click',e=>{
+  const del=e.target.closest('[data-del]'); const yes=e.target.closest('[data-yes]'); const no=e.target.closest('[data-no]');
+  if(del){const act=del.parentElement;act.innerHTML='<span class="confirm">Удалить снимок?</span><button class="btn-danger" data-yes="'+del.dataset.del+'">Да</button><button class="btn-ghost" data-no>Нет</button>';}
+  else if(yes){deleteSnapshot(yes.dataset.yes);}
+  else if(no){render();}
+});
+
+/* ---------- key-value storage: Telegram CloudStorage, fallback localStorage ---------- */
+const tg=(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.initData)?window.Telegram.WebApp:null;
+const cloudOK=!!(tg&&tg.CloudStorage&&(!tg.isVersionAtLeast||tg.isVersionAtLeast('6.9')));
+const cs=cloudOK?tg.CloudStorage:null;
+const cbp=(fn,...args)=>new Promise((res,rej)=>fn.call(cs,...args,(err,val)=>err?rej(new Error(String(err))):res(val)));
+const KV=cloudOK?{
+  keys:()=>cbp(cs.getKeys),
+  get:async ks=>{const out={};for(let i=0;i<ks.length;i+=20){Object.assign(out,await cbp(cs.getItems,ks.slice(i,i+20))||{});}return out;},
+  set:(k,v)=>cbp(cs.setItem,k,v),
+  remove:async ks=>{for(let i=0;i<ks.length;i+=20){await cbp(cs.removeItems,ks.slice(i,i+20));}}
+}:{
+  keys:async()=>{try{return Object.keys(localStorage).filter(k=>/^[SP]_/.test(k));}catch(e){return [];}},
+  get:async ks=>{const o={};try{ks.forEach(k=>{o[k]=localStorage.getItem(k)||'';});}catch(e){}return o;},
+  set:async(k,v)=>{localStorage.setItem(k,v);},
+  remove:async ks=>{try{ks.forEach(k=>localStorage.removeItem(k));}catch(e){}}
+};
+const PIECE=4000;
+function makeCol(C){
+  const mk=id=>C+'_n_'+id, pk=(id,i)=>C+'_'+i+'_'+id;
+  return {
+    doc:id=>({
+      set:async data=>{
+        const str=JSON.stringify(data); const n=Math.max(1,Math.ceil(str.length/PIECE));
+        let old=0; try{old=parseInt((await KV.get([mk(id)]))[mk(id)]||'0',10)||0;}catch(e){}
+        for(let i=0;i<n;i++) await KV.set(pk(id,i),str.slice(i*PIECE,(i+1)*PIECE));
+        await KV.set(mk(id),String(n));
+        if(old>n){const extra=[];for(let i=n;i<old;i++)extra.push(pk(id,i));await KV.remove(extra);}
+      },
+      delete:async()=>{
+        let n=0; try{n=parseInt((await KV.get([mk(id)]))[mk(id)]||'0',10)||0;}catch(e){}
+        const ks=[mk(id)]; for(let i=0;i<n;i++) ks.push(pk(id,i)); await KV.remove(ks);
+      }
+    }),
+    get:async()=>{
+      const all=await KV.keys(); const metaKeys=all.filter(k=>k.startsWith(C+'_n_'));
+      const metas=metaKeys.length?await KV.get(metaKeys):{};
+      const need=[]; const plan=metaKeys.map(k=>{const id=k.slice(C.length+3), n=parseInt(metas[k]||'0',10)||0; const ks=[]; for(let i=0;i<n;i++){ks.push(pk(id,i));need.push(pk(id,i));} return {id,ks};});
+      const vals=need.length?await KV.get(need):{};
+      const docs=[]; plan.forEach(p=>{ try{ const v=JSON.parse(p.ks.map(k=>vals[k]||'').join('')); docs.push({id:p.id,data:()=>v}); }catch(e){} });
+      return {docs};
+    }
+  };
+}
+
+/* ---------- profile (цифры вписываются вручную) ---------- */
+let prof=null, profHist=[], pcol=null;
+const fmtN=n=>n==null?'—':Number(n).toLocaleString('ru-RU');
+const localDay=()=>{const t=new Date();return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');};
+const DEFAULT_PROF={followers:1597,following:2249,posts:51,name:'Владислав Жариков, упаковка личных и комерческих брендов',category:'Услуги для бизнеса',bio:['Бренд-дизайнер, креатор','Founder @mamaia.family','Маркетинговая упаковка…'],link:'t.me/vladislav_zharykov',checkedAt:Date.parse('2026-11-11T13:23:00+02:00')};
+const DEFAULT_HIST=[{date:'2026-11-10',followers:1596,following:2248,posts:51},{date:'2026-11-11',followers:1597,following:2249,posts:51}];
+function renderProfile(){
+  const ps=$('profStats'), meta=$('profMeta'), cover=$('profCover'), bio=$('profBio');
+  if(!prof){ $('profName').textContent='Загружаю данные профиля…'; ps.innerHTML=''; cover.hidden=true; bio.hidden=true; meta.textContent=''; return; }
+  $('profName').textContent=prof.name||'';
+  const day=localDay();
+  const prev=profHist.filter(h=>h.date<day).sort((a,b)=>a.date<b.date?1:-1)[0];
+  const d=k=>{if(!prev||prev[k]==null||prof[k]==null)return '<span class="d">&nbsp;</span>';const v=prof[k]-prev[k];return '<span class="d '+(v>0?'up':v<0?'down':'')+'">'+(v>0?'+':v<0?'−':'±')+Math.abs(v)+' с '+fmtShort(prev.date)+'</span>';};
+  ps.innerHTML='<div class="pstat"><b>'+fmtN(prof.posts)+'</b><span class="label">публикаций</span>'+d('posts')+'</div><div class="pstat"><b>'+fmtN(prof.followers)+'</b><span class="label">подписчиков</span>'+d('followers')+'</div><div class="pstat"><b>'+fmtN(prof.following)+'</b><span class="label">подписок</span>'+d('following')+'</div>';
+  if(prof.bio&&prof.bio.length){ bio.hidden=false; bio.innerHTML=''; if(prof.category){const c=document.createElement('span');c.className='cat';c.textContent=prof.category;bio.append(c);} prof.bio.forEach(l=>{const x=document.createElement('span');x.textContent=l;bio.append(x);}); if(prof.link){const a=document.createElement('a');a.href='https://'+String(prof.link).replace(/^https?:\/\//,'');a.target='_blank';a.rel='noopener';a.textContent=prof.link;bio.append(a);} } else bio.hidden=true;
+  const B=current().B;
+  if(B&&!demo&&prof.followers){ const pct=Math.min(100,Math.round(B.followers.size/prof.followers*100)); cover.hidden=false; cover.classList.toggle('low',pct<90);
+    cover.innerHTML='<div class="track"><i style="width:'+pct+'%"></i></div><span class="ct">Снимок за '+fmtShort(B.date)+' содержит <b>'+fmtN(B.followers.size)+'</b> из <b>'+fmtN(prof.followers)+'</b> подписчиков профиля ('+pct+'%).'+(pct<90?' Выгрузка неполная: сделайте её с периодом «За всё время».':' Выгрузка полная.')+'</span>'; }
+  else cover.hidden=true;
+  meta.textContent='// цифры на '+(prof.checkedAt?new Date(prof.checkedAt).toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'—')+' · обновляются кнопкой «Вписать цифры»';
+}
+async function loadProfile(){
+  try{ const all=await pcol.get(); profHist=[]; prof=null; all.docs.forEach(x=>{const v=x.data()||{}; if(x.id==='current')prof=v; else if(x.id.startsWith('h_'))profHist.push(Object.assign({date:x.id.slice(2)},v));}); }catch(e){}
+  if(!prof){ prof=Object.assign({},DEFAULT_PROF); profHist=DEFAULT_HIST.slice(); }
+  renderProfile();
+}
+function openPform(){ const f=$('pform'); f.hidden=false; $('pfPosts').value=prof&&prof.posts!=null?prof.posts:''; $('pfFollowers').value=prof&&prof.followers!=null?prof.followers:''; $('pfFollowing').value=prof&&prof.following!=null?prof.following:''; $('pfFollowers').focus(); }
+$('profRefresh').addEventListener('click',()=>{ $('pform').hidden?openPform():($('pform').hidden=true); });
+$('pfCancel').addEventListener('click',()=>{$('pform').hidden=true;});
+$('pform').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const num=id=>{const v=$(id).value.trim();return v===''?null:Math.max(0,Math.round(+v));};
+  const f=num('pfFollowers'), g=num('pfFollowing'), po=num('pfPosts');
+  if(f==null){ toast('Впишите число подписчиков'); return; }
+  const now=Date.now(), day=localDay();
+  prof=Object.assign({},prof||DEFAULT_PROF,{followers:f,following:g,posts:po,checkedAt:now});
+  const h={followers:f,following:g,posts:po,at:now};
+  if(!profHist.some(x=>x.date<day)) { const base=DEFAULT_HIST.filter(x=>x.date<day); profHist=base.concat(profHist); if(pcol){ for(const x of base){ try{ await pcol.doc('h_'+x.date).set({followers:x.followers,following:x.following,posts:x.posts}); }catch(err){} } } }
+  profHist=profHist.filter(x=>x.date!==day).concat([Object.assign({date:day},h)]);
+  $('pform').hidden=true; renderProfile();
+  try{ await pcol.doc('current').set(prof); await pcol.doc('h_'+day).set(h); toast('Цифры сохранены'); }
+  catch(err){ toast('Не удалось сохранить цифры: '+((err&&err.message)||'ошибка хранилища')); }
+});
+
+/* ---------- theme: в Telegram берём тему клиента ---------- */
+const MODES=['auto','light','dark'],MODE_LABEL={auto:'авто',light:'день',dark:'ночь'};
+let mode='auto';try{const m=localStorage.getItem('aud-mode');if(MODES.includes(m))mode=m;}catch(e){}
+function applyTheme(){
+  let eff;
+  if(tg&&mode==='auto') eff=tg.colorScheme==='dark'?'dark':'light';
+  else { const h=new Date().getHours(); eff=mode==='auto'?(h>=7&&h<20?'light':'dark'):mode; }
+  document.documentElement.setAttribute('data-pult',eff);
+  $('themeLabel').textContent=MODE_LABEL[mode]+(mode==='auto'?' · '+(eff==='light'?'день':'ночь'):'');
+  if(tg){ try{ const bg=getComputedStyle(document.body).backgroundColor; const hex='#'+(bg.match(/\d+/g)||[]).slice(0,3).map(x=>(+x).toString(16).padStart(2,'0')).join(''); if(hex.length===7){ tg.setHeaderColor&&tg.setHeaderColor(hex); tg.setBackgroundColor&&tg.setBackgroundColor(hex); } }catch(e){} }
+}
+$('themeBtn').addEventListener('click',()=>{mode=MODES[(MODES.indexOf(mode)+1)%3];try{localStorage.setItem('aud-mode',mode);}catch(e){}applyTheme();});
+applyTheme(); setInterval(applyTheme,60000);
+if(tg){ try{ tg.onEvent('themeChanged',applyTheme); }catch(e){} }
+addEventListener('scroll',()=>$('bar').classList.toggle('scrolled',scrollY>8),{passive:true});
+// внешние ссылки в Telegram открываем через клиент
+document.addEventListener('click',e=>{ const a=e.target.closest('a[href^="http"]'); if(!a||!tg||!tg.openLink)return; e.preventDefault(); try{ tg.openLink(a.href); }catch(err){ location.href=a.href; } });
+
+/* ---------- boot ---------- */
+if(tg){ try{ tg.ready(); tg.expand(); }catch(e){} }
+loadDemo(); setDefaultCompare(); render();
+(async()=>{
+  db=true; col=makeCol('S'); pcol=makeCol('P');
+  try{ await loadProfile(); }catch(e){ prof=Object.assign({},DEFAULT_PROF); profHist=DEFAULT_HIST.slice(); renderProfile(); }
+  try{
+    const loaded=await loadAll();
+    setStatus(cloudOK?'ok':'warn', cloudOK?'Снимки хранятся в облаке Telegram, их видите только вы':'Открыто вне Telegram: снимки хранятся только в этом браузере');
+    if(loaded.length){ demo=false; snaps=loaded; sortSnaps(); setDefaultCompare(); render(); }
+  }catch(e){ setStatus('warn','Не удалось открыть хранилище ('+((e&&e.message)||'ошибка')+'). Снимки сохранятся только до закрытия приложения.'); }
+})();
+})();
+</script>
+</body>
+</html>
